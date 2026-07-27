@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+ssh -i "$HOME/.ssh/school" ubuntu@"$1"
