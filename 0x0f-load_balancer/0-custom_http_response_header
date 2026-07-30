@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Installs Nginx and configures a custom HTTP header X-Served-By
+
+apt-get -y update
+apt-get -y install nginx
+
+cat << 'CONFIG' > /etc/nginx/sites-available/default
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    root /var/www/html;
+    index index.html index.htm index.nginx-debian.html;
+    server_name _;
+    add_header X-Served-By $hostname;
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}
+CONFIG
+
+service nginx restart
