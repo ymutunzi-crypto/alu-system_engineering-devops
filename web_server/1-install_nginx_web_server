@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
-# Configures a new Ubuntu machine with Nginx serving Hello World!
+# Configures a new Ubuntu machine with Nginx serving Holberton School
 
 apt-get update -y
 apt-get install -y nginx
 
-echo "Hello World!" > /var/www/html/index.nginx-debian.html
+echo "Hello World!" > /var/www/html/index.html
+echo "Holberton School" > /var/www/html/index.nginx-debian.html
+echo "Holberton School" > /var/www/html/index.html
 
-service nginx start
+service nginx restart
