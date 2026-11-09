@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# Installs and configures HAproxy to distribute traffic to web-01 and web-02
+
+apt-get update -y
+apt-get install -y haproxy
+
+# Append frontend and backend configurations to HAproxy config file
+cat << 'CFG' >> /etc/haproxy/haproxy.cfg
+
+frontend my_frontend
+bind *:80
+default_backend my_backend
+
+backend my_backend
+balance roundrobin
+server 7109-web-01 13.40.18.231:80 check
+server 7109-web-02 13.135.253.80:80 check
+CFG
+
+service haproxy restart
